@@ -22,6 +22,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+
+    @team_users = TeamUser.where(:user_id => @user.id)
+    @teams = []
+    @team_users.each do |team_user|
+      team = Team.find(team_user.team_id)
+      @teams << team
+    end
+    @full_time = @user.created_at
+    @time = @full_time.to_s[0,10]
   end
 
 
@@ -33,7 +42,6 @@ class UsersController < ApplicationController
   def update
     user_id = current_user.id
     @user = User.find_by_id(user_id)
-
     @user.update_attributes(user_params)
     redirect_to user_path(@user)
   end

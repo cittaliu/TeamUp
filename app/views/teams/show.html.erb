@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <h2><%= @team.name %></h2>
+            <h4>&emsp;<i>Admin User <%= link_to current_user%></i></h4>
+            <p><%= @team.description %></p>
+            <img src="<%= @team.img %>" alt="avator image" height='200px' width='200px'>
+            <br>
+            <%= link_to "Home", '/', class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>

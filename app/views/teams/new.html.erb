@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="row">
+        <br>
+        <div class="text-center">
+          <h1>Create New Team</h1>
+        </div>
+        <br>
+      </div>
+      <%= form_for :team, url: '/teams', method: :POST do |f| %>
+          <fieldset class="form-group">
+            <label for="name">Name</label>
+            <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="image">Team Avator</label>
+            <%= f.text_field :img, class: "form-control", placeholder: "URL" %>
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="email">Description</label>
+            <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
+            <!-- display flash messages  -->
+            <% flash.each do |name, msg| %>
+            <div id="flash"> &emsp; <i><%= msg %></i></div>
+            <% end %>
+          </fieldset>
+          <fieldset class="form-group">
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+            <%= link_to "Cancel", user_path(current_user), class: "btn btn-primary" %>
+          </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>
