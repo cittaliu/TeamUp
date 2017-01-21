@@ -10,18 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120050654) do
+ActiveRecord::Schema.define(version: 20170121230343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "image"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "objectives", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "status"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "team_id"
+    t.integer  "department_id"
+    t.index ["department_id"], name: "index_objectives_on_department_id", using: :btree
+    t.index ["team_id"], name: "index_objectives_on_team_id", using: :btree
     t.index ["user_id"], name: "index_objectives_on_user_id", using: :btree
   end
 
@@ -40,8 +52,10 @@ ActiveRecord::Schema.define(version: 20170120050654) do
     t.boolean  "is_private"
     t.string   "img"
     t.integer  "creator_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "department_id"
+    t.index ["department_id"], name: "index_teams_on_department_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +70,7 @@ ActiveRecord::Schema.define(version: 20170120050654) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "objectives", "departments"
+  add_foreign_key "objectives", "teams"
+  add_foreign_key "teams", "departments"
 end

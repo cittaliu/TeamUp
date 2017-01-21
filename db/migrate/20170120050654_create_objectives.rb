@@ -5,7 +5,9 @@ class CreateObjectives < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :status
       t.belongs_to :user
-
+      t.belongs_to :team
+      t.belongs_to :department
+      
       t.timestamps
     end
   end
