@@ -9,6 +9,19 @@
   </head>
 
   <body>
+
+  <div class="head-nav">
+
+    <%= link_to("Home", "/") unless current_page?("/") %> |
+    <% if current_user %>
+     <%= link_to "#{current_user.first_name}", user_path(current_user) %> | <%= link_to "Logout", '/logout' %>
+    <% else %>
+     <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+    <% end %>
+
+  </div>
+
     <%= yield %>
+
   </body>
 </html>

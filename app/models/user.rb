@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  has_many :team_users, dependent: :destory
+
+  has_many :team_users, dependent: :destroy
   has_many :teams, through: :team_users
   has_many :objectives
+
+  has_secure_password
 end
