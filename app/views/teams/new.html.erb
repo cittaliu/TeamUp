@@ -1,14 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="row">
-        <br>
+    <div class="col-md-12">
+
+      <div class="col-md-4 col-md-offset-1">
+        <div class="text-center">
+          <h1>Search</h1>
+        </div>
+
+
+
+      </div>
+      <div class="col-md-4 col-md-offset-1">
         <div class="text-center">
           <h1>Create New Team</h1>
         </div>
-        <br>
-      </div>
-      <%= form_for :team, url: '/teams', method: :POST do |f| %>
+        <%= form_for :team, url: '/teams', method: :POST do |f| %>
           <fieldset class="form-group">
             <label for="name">Name</label>
             <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
@@ -19,11 +25,11 @@
           </fieldset>
           <fieldset class="form-group">
             <label for="email">Description</label>
-            <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
-            <!-- display flash messages  -->
-            <% flash.each do |name, msg| %>
-            <div id="flash"> &emsp; <i><%= msg %></i></div>
-            <% end %>
+              <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
+              <!-- display flash messages  -->
+              <% flash.each do |name, msg| %>
+              <div id="flash"> &emsp; <i><%= msg %></i></div>
+              <% end %>
           </fieldset>
           <fieldset class="form-group">
             <%= f.hidden_field :department_id, class: "form-control", value: 1 %>
@@ -32,7 +38,8 @@
             <%= f.submit "Submit", class: "btn btn-primary" %>
             <%= link_to "Cancel", user_path(current_user), class: "btn btn-primary" %>
           </fieldset>
-      <% end %>
+        <% end %>
+    </div>
     </div>
   </div>
 </div>

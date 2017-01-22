@@ -9,6 +9,16 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @creator = User.find(@team.creator_id)
+    @user = User.where()
+
+    @team_users = TeamUser.where(:team_id => @team.id)
+    @users = []
+    @team_users.each do |team_user|
+      user = User.find(team_user.user_id)
+      @users << user
+    end
+
   end
 
   def create
