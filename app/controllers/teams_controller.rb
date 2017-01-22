@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
       current_user.teams << @team
     else
       flash[:error] = @team.errors.full_messages[0] +"!"
-      redirect_to "/"
+      redirect_to new_team_path
     end
   end
 
@@ -43,6 +43,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :description)
+    params.require(:team).permit(:name, :description, :department_id)
   end
 end
