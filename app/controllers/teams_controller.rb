@@ -56,9 +56,15 @@ class TeamsController < ApplicationController
     redirect_to user_path
   end
 
+  def add_to_team
+    @user = User.find_by_id(params[:id])
+    @team = current_team
+    @team.users << @user
+  end
+
   private
 
   def team_params
-    params.require(:team).permit(:name, :description, :department_id)
+    params.require(:team).permit(:name, :description)
   end
 end

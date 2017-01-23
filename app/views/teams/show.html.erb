@@ -49,17 +49,17 @@
                   </h5>
                 </div>
                 <div class="col-md-8">
-                  <div class="col-md-12">
+                  <div class="col-md-10">
                       <br>
                       <%= month_calendar events: @meetings do |date, meetings| %>
-                      <%= date %>
+                      <%= date.to_s[5..10] %>
                       <% meetings.each do |meeting| %>
                       <div>
                         <%= meeting.name %>
                       </div>
                       <% end %>
                       <% end %>
-                      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Main Menu</a>
                   </div>
 
                 </div>

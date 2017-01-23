@@ -58,9 +58,6 @@ class UsersController < ApplicationController
     @users = @search.results
   end
 
-  def add_to_team
-
-  end
 
   private
   def user_params

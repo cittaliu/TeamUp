@@ -50,6 +50,7 @@
                                 <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary" %>
                                 <a href="#menu-toggle" class="btn btn-danger" id="menu-toggle">Switch Team</a>
                                 <%end%>
+                                <%= link_to "Add", add_user_path(@user),:controller => :team, :action => :add_to_team, method: :POST, class: "btn btn-primary" %>
                         </div>
                     </div>
                 </div>

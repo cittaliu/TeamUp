@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   # Search for user
   get '/search', to: 'users#search', as: 'search_users'
+  post '/add_user/:id', to: 'teams#add_to_team', as: 'add_user'
 
 
 
