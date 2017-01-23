@@ -1,0 +1,13 @@
+<% @objectives.each do |objective| %>
+            <p class="card-text">
+                <strong><%= objective.title %></strong>
+                <br>
+                <strong><%=objective.description%></strong>
+                <br>
+                <strong><%=objective.status%></strong>
+            </p>
+            <%= link_to "View", objective_path(objective), class: 'btn btn-info' %>
+            <hr>
+
+<% end %>
+<%= link_to "Create New Objective", new_objective_path, class: 'btn btn-danger' %>

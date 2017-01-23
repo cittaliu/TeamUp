@@ -14,19 +14,22 @@
                     TeamUp
                 </a>
             </li>
-            <% @users.each do |user| %>
-            <li class="team_avator">
-              <%= link_to user_path(user) do %>
-                <%= user.first_name %> <%= user.last_name %>
-                <% end %>
-            </li>
-            <% end %>
             <li>
               <%= link_to 'Invite Users', search_users_path %>
             </li>
             <li>
               <%= link_to 'Meetings', meetings_path %>
             </li>
+            <li>
+              <%= link_to 'Objectives', objectives_path %>
+            </li>
+            <% @users.each do |user| %>
+            <li class="team_avator">
+              <%= link_to user_path(user) do %>
+              <%= user.first_name %> <%= user.last_name %>
+              <% end %>
+            </li>
+            <% end %>
 
         </ul>
     </div>

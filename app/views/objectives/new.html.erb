@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12"></div>
+        <div class="col-md-4 col-md-offset-1">
+            <div class="text-center">
+                <h1>Create New Objective</h1>
+            </div>
+            <%= form_for :objective, url: '/objectives' do |f| %>
+            <fieldset class="form-group">
+                <label for="title"></label>
+                <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="Description">Description</label>
+                <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
+                <!-- display flash messages  -->
+                <% flash.each do |name, msg| %>
+                <div id="flash">
+                    &emsp;
+                    <i><%= msg %></i>
+                </div>
+                <% end %>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="status">Status</label>
+                <%= f.select :status, ["On Track", "Behind", "At Risk"], class: "form-control", placeholder: "Status" %>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <%= f.hidden_field :team_id, class: "form-control", :value => current_team.id %>
+            </fieldset>
+            <fieldset class="form-group">
+              <%= f.hidden_field :user_id, class: "form-control", :value => current_user.id %>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <%= f.submit "Submit", class: "btn btn-danger" %>
+                <%= link_to "Cancel", objectives_path, class: "btn btn-primary" %>
+            </fieldset>
+            <% end %>
+        </div>
+    </div>
+</div>
