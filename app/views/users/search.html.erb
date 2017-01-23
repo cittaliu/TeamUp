@@ -1,6 +1,6 @@
 <div class="text-center">
   <h1>Search</h1>
-  <%= form_tag search_user_path, :method => :get do %>
+  <%= form_tag search_users_path, :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
@@ -15,5 +15,5 @@
         <strong><%=user.last_name%></strong>
         <%= user.email %>
     </p>
-   <%= link_to "Add", user_path(user), class: 'btn btn-info' %>
+   <%= link_to "View", user_path(user), class: 'btn btn-info' %>
 <% end %>

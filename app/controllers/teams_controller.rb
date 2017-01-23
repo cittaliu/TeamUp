@@ -15,8 +15,9 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    session[:team_id] = @team.id
     @creator = User.find(@team.creator_id)
-    @meetings = Meeting.all
+    @meetings = Meeting.where(:team_id => current_team.id)
     @team_users = TeamUser.where(:team_id => @team.id)
     @users = []
     @team_users.each do |team_user|

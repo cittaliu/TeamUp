@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
   def index
-    @search = User.search do
-      fulltext params[:search]
-    end
-    @users = @search.results
   end
 
   def new
@@ -53,6 +49,17 @@ class UsersController < ApplicationController
     delete_user = User.find_by_id(params[:id])
     User.destroy(delete_user)
     redirect_to users_path
+  end
+
+  def search
+    @search = User.search do
+      fulltext params[:search]
+    end
+    @users = @search.results
+  end
+
+  def add_to_team
+
   end
 
   private

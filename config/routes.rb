@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :meetings
   resources :events
+
   get 'teams/index'
 
   get 'teams/new'
@@ -25,6 +26,11 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show', as: 'user'
   get '/users/:id/edit', to: 'users#edit', as: 'edit_user'
   patch '/users/:id', to: 'users#update'
+
+  # Search for user
+  get '/search', to: 'users#search', as: 'search_users'
+
+
 
   #Team Pages
   resources :teams do
