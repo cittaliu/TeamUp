@@ -1,0 +1,19 @@
+<div class="text-center">
+  <h1>Search</h1>
+  <%= form_tag search_user_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <% end %>
+
+</div>
+
+<% @users.each do |user| %>
+    <p class="card-text">
+        <strong><%= user.first_name %></strong>
+        <strong><%=user.last_name%></strong>
+        <%= user.email %>
+    </p>
+   <%= link_to "Add", user_path(user), class: 'btn btn-info' %>
+<% end %>

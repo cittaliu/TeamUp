@@ -5,4 +5,10 @@ class User < ApplicationRecord
   has_many :objectives
 
   has_secure_password
+
+  searchable do
+    text :first_name
+    text :last_name
+    text :email
+  end
 end

@@ -31,6 +31,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'progress_bar'
+
+gem "simple_calendar", "~> 2.0"
+
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,5 +1,11 @@
 class TeamsController < ApplicationController
   def index
+    @search = Team.search do
+      fulltext params[:search]
+    end
+    @teams = @search.results
+    # @teams_by_date = @teams.group_by(&:date_published)
+    # @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   def new
@@ -10,8 +16,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @creator = User.find(@team.creator_id)
-    @user = User.where()
-
+    @meetings = Meeting.all
     @team_users = TeamUser.where(:team_id => @team.id)
     @users = []
     @team_users.each do |team_user|
