@@ -2,22 +2,23 @@
         <% if current_user == @user%>
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+                <li>
                     <a href="/">
-                        TeamUp
+                        <h3>TeamUp</h3>
                     </a>
                 </li>
+                <br>
                 <% @teams.each do |team| %>
                 <li class="team_avator">
                   <%= link_to team_path(team) do %>
-                    <img src="<%=team.img %>" height='100px' width='100px'>
+                    <img src="<%=team.img %>" height='90px' width='90px' style='border-radius:100px'>
                     <% end %>
                     <br>
                 </li>
                 <% end %>
                 <li>
                   <%= link_to new_team_path do %>
-                    <img src="http://www.magnetstreet.com/assets/icons/color-wheel-target.svg" height='100px' width='100px'>
+                    <img src="http://www.magnetstreet.com/assets/icons/color-wheel-target.svg" height='90px' width='90px'>
                     <% end %>
                 </li>
 

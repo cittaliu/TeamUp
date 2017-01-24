@@ -24,6 +24,12 @@ class TeamsController < ApplicationController
       user = User.find(team_user.user_id)
       @users << user
     end
+    @upcomings = []
+    @meetings.each do |meeting|
+      if meeting.start_time > Time.now
+        @upcomings << meeting
+      end
+    end
 
   end
 

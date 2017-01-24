@@ -64,12 +64,14 @@ body {
 }
 
 .sidebar-nav li a {
+    font-size: 13px;
     display: block;
     text-decoration: none;
     color: #999999;
 }
 
 .sidebar-nav li a:hover {
+    font-size: 14px;
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
@@ -81,8 +83,9 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 20px;
+    height: 200px;
+    color: grey;
+    font-style: oblique;
     line-height: 60px;
 }
 

@@ -5,11 +5,13 @@ class MeetingsController < ApplicationController
   # GET /meetings.json
   def index
     @meetings = Meeting.where(:team_id => current_team.id)
+
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+
   end
 
   # GET /meetings/new
