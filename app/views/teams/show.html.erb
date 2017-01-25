@@ -10,66 +10,157 @@
               <h4><%= @team.name %></h4>
             </li> -->
             <li class="sidebar-brand">
-              <img src="<%= @team.img %>" alt="avator image" height='100px' width='100px' style='border-radius:100px'>
-                <strong><h3><%= @team.name %></h3></strong>
-                <p><i>-- <%= @team.description %></i></p>
-                </h5>
-            </li>
-            <li>
-              <%= link_to 'Invite Users', search_users_path %>
-            </li>
-            <li>
-              <%= link_to 'Meetings', meetings_path %>
-            </li>
-            <li>
-              <%= link_to 'Objectives', objectives_path %>
-            </li>
-            <% @users.each do |user| %>
-            <li class="team_avator">
-              <%= link_to user_path(user) do %>
-              <%= user.first_name %> <%= user.last_name %>
-              <% end %>
-            </li>
+                <img src="<%= @team.img %>" alt="avator image" height='100px' width='100px' style='border-radius:100px'>
+                <strong>
+                    <h3><%= @team.name %></h3>
+                </strong>
+                <p>
+                    <i>--
+                        <%= @team.description %></i>
+                </p>
+            </h5>
+        </li>
+        <li>
+            <%= link_to 'Invite Users', search_users_path %>
+        </li>
+        <li>
+            <%= link_to 'Meetings', meetings_path %>
+        </li>
+        <li>
+            <%= link_to 'Objectives', objectives_path %>
+        </li>
+        <% @users.each do |user| %>
+        <li class="team_avator">
+            <%= link_to user_path(user) do %>
+            <%= user.first_name %>
+            <%= user.last_name %>
             <% end %>
+        </li>
+        <% end %>
 
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                  <div class="col-md-6">
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-5">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Main Menu</a>
                     <br><br>
-                      <%= week_calendar number_of_weeks: 2, events: @meetings do |date, meetings| %>
-                      <%= date.to_s[5..10] %>
-                      <% meetings.each do |meeting| %>
-                      <div>
+                    <%= week_calendar number_of_weeks: 2, events: @meetings do |date, meetings| %>
+                    <%= date.to_s[5..10] %>
+                    <% meetings.each do |meeting| %>
+                    <div>
                         <%= meeting.name %>
-                      </div>
-                      <% end %>
-                   <% end %>
-                   <h4>Upcoming Meeting Schedule:</h4>
-                   <% @upcomings.each do |upcoming| %>
-                   <%= upcoming.name %>
-                   <br>
-                   <% end %>
-                 </div>
+                    </div>
+                    <% end %>
+                    <% end %>
+                    <div class="col-md-6">
+                        <h4>Upcoming Meetings</h4>
+                        <% @upcomings.each do |upcoming| %>
+                        <h5><%= upcoming.name %></h5>
+                        <i><%= upcoming.start_time.to_s[5..15] %>
+                            --
+                            <%= upcoming.end_time.to_s[5..15] %></i>
+                        <br>
+                        <% end %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4>Meeting in Progress</h4>
+                        <% @inprogress.each do |inprogress| %>
+                        <h5><%= inprogress.name %></h5>
+                        <i><%= inprogress.start_time.to_s[5..15] %>
+                            --
+                            <%= inprogress.end_time.to_s[5..15] %></i>
+                        <br>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+
+                <div class="col-md-5">
+                    <h4>Here is a Summary of Monthly Team-Wide Objectives (<%= @count_active %>)</h4>
+                    <div class="col-md-1">
+                        <div class="green"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_on_track > 1 %>
+                        <h5><%= @count_on_track %>
+                            objectives are on track</h5>
+                    <% else %>
+                        <h5><%= @count_on_track %>
+                            objective is on track</h5>
+                        <% end %>
+
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="yellow"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_behind > 1 %>
+                        <h5><%= @count_behind %>
+                            objectives are behind</h5>
+                    <% else %>
+                        <h5><%= @count_behind %>
+                            objective is behind</h5>
+                        <% end %>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="red"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_at_risk > 1 %>
+                        <h5><%= @count_at_risk %>
+                            objectives are at risk</h5>
+                    <% else %>
+                        <h5><%= @count_at_risk %>
+                            objective is at risk</h5>
+                        <% end %>
+                    </div>
+                    <br><br><br>
+                    <% @objectives.each do |objective| %>
+                    <div class="col-md-12 objective">
+                        <div class="col-md-4 userinfo">
+
+                            <img src="<%= User.find(objective.user_id).img %>" height='32px' width='32px' style='border-radius:100px'>
+                            <%= User.find(objective.user_id).first_name %>
+                            <%= User.find(objective.user_id).last_name[0] %>
+                        </div>
+                        <div class="col-md-8 status">
+                          <% if objective.status == 'On Track' %>
+                            <strong><span style="color:#5cb85c"><%=objective.status%></span></strong>
+                            <% elsif objective.status == 'Behind' %>
+                            <strong><span style="color:#f0ad4e"><%=objective.status%></span></strong>
+                            <% else %>
+                            <strong><span style="color:#d9534f"><%=objective.status%></span></strong>
+                            <% end %>
+
+                            <strong><%= objective.title %></strong>
+                            <div id='progress'>
+                                <i><%=objective.progress%></i>% - Due in
+                                <%= distance_of_time_in_words_to_now(objective.deadline)%>
+                            </div>
+                        </div>
+
+                    </div>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
-  </div>
-    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#page-content-wrapper -->
 </div>
 <!-- /#wrapper -->
 
-
 <!-- Menu Toggle Script -->
 <script>
-$("#menu-toggle").click(function(e) {
+$("#menu-toggle").click(function (e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });

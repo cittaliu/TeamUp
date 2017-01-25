@@ -1,6 +1,11 @@
 class ObjectivesController < ApplicationController
   def index
-    @objectives = Objective.where(:team_id => current_team.id)
+      @all_objectives = Objective.where(:team_id => current_team.id)
+    if params[:status]
+      @objectives = @all_objectives.where(:status => params[:status])
+    else
+      @objectives = @all_objectives
+    end
   end
 
   def new
@@ -42,7 +47,7 @@ class ObjectivesController < ApplicationController
 
   private
   def objective_params
-    params.require(:objective).permit(:title, :description, :status, :team_id, :user_id)
+    params.require(:objective).permit(:title, :description, :status, :deadline, :progress, :team_id, :user_id)
   end
 
 end

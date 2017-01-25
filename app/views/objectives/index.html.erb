@@ -1,13 +1,30 @@
-<% @objectives.each do |objective| %>
-            <p class="card-text">
-                <strong><%= objective.title %></strong>
-                <br>
-                <strong><%=objective.description%></strong>
-                <br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <br>
+            &emsp;<%= link_to "On Track", objectives_path(:status=>"On Track"), class: "btn btn-success" %>
+            <%= link_to "Behind", objectives_path(:status=>"Behind"), class: "btn btn-warning" %>
+            <%= link_to "At Risk", objectives_path(:status=>"At Risk"), class: "btn btn-danger" %>
+            <div class="objectives">
+                <% @objectives.each do |objective| %>
+                <div class="objective">
+                <strong>
+                    <h5><%= objective.title %></h5>
+                </strong>
+                <i><%=objective.description%></i>
                 <strong><%=objective.status%></strong>
-            </p>
-            <%= link_to "View", objective_path(objective), class: 'btn btn-info' %>
-            <hr>
 
-<% end %>
-<%= link_to "Create New Objective", new_objective_path, class: 'btn btn-danger' %>
+                <%= link_to 'Show', objective %>
+                |
+                <%= link_to 'Edit', edit_objective_path(objective) %>
+                |
+                <%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+
+                <% end %>
+            </div>
+            <hr>
+            <%= link_to "Create New Objective", new_objective_path, class: 'btn btn-danger' %>
+        </div>
+    </div>
+</div>

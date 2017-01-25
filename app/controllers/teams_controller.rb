@@ -24,12 +24,46 @@ class TeamsController < ApplicationController
       user = User.find(team_user.user_id)
       @users << user
     end
+    # show upcoming meetings
     @upcomings = []
+    @inprogress = []
     @meetings.each do |meeting|
       if meeting.start_time > Time.now
         @upcomings << meeting
+      elsif meeting.start_time < Time.now && meeting.end_time > Time.now
+        @inprogress << meeting
       end
     end
+    # show summary of team objectives
+    @all_objectives = Objective.where(:team_id => current_team.id)
+    @objectives_month = @all_objectives.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_month, DateTime.now.end_of_month)
+    # only calculate the objectives which are active
+    @active_objectives = @all_objectives.where("deadline >= ?", Date.today)
+    @count_all = @all_objectives.length
+    @count_month = @objectives_month.length
+    @count_active = @active_objectives.length
+    @objectives = @active_objectives.order('created_at DESC')[0..5]
+
+    @count_on_track = @active_objectives.where(:status => "On Track").length
+    @count_behind = @active_objectives.where(:status => "Behind").length
+    @count_at_risk = @active_objectives.where(:status => "At Risk").length
+
+
+
+    # @all_objectives = Objective.where(:team_id => current_team.id)
+    # # only show the upcming objectives
+    # @objectives_active = []
+    # @all_objectives.each do |elem|
+    #   if elem.deadline > Time.now
+    #     @objectives_active << elem
+    #   end
+    # end
+    # @objectives = Objective.where(:team_id => current_team.id).order('created_at DESC')[0..5]
+    # @counts = @objectives_active.length
+    # @count_on_track = @objectives_active.where(:status => "On Track").length
+    # @count_behind = @objectives_active.where(:status => "Behind").length
+    # @count_at_risk = @objectives_active.where(:status => "At Risk").length
+
 
   end
 

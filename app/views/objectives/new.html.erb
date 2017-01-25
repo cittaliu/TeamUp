@@ -1,18 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12"></div>
-        <div class="col-md-4 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="text-center">
                 <h1>Create New Objective</h1>
             </div>
             <%= form_for :objective, url: '/objectives' do |f| %>
             <fieldset class="form-group">
-                <label for="title"></label>
+                <label for="title">Title</label>
                 <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
             </fieldset>
 
             <fieldset class="form-group">
-                <label for="Description">Description</label>
+                <label for="description">Description</label>
                 <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
                 <!-- display flash messages  -->
                 <% flash.each do |name, msg| %>
@@ -21,6 +21,14 @@
                     <i><%= msg %></i>
                 </div>
                 <% end %>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="deadline">Deadline</label>
+               <%= f.datetime_select :deadline %>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="progress">Current Progress of Objective</label>
+               <%= f.number_field :progress,  min: 0, max: 100 %>%
             </fieldset>
 
             <fieldset class="form-group">
