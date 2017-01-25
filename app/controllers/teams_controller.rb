@@ -89,6 +89,7 @@ class TeamsController < ApplicationController
     @user = User.find_by_id(params[:id])
     @team = current_team
     @team.users << @user
+    redirect_to current_team
   end
 
   private

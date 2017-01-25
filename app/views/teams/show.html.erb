@@ -84,7 +84,6 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-6">
                     <h4>Here is a Summary of Active Team-Wide Objectives (<%= @count_active %>)</h4>
                     <div class="col-md-1">
@@ -135,36 +134,43 @@
                             <%= User.find(objective.user_id).first_name %>
                         </div>
                         <div class="col-md-7 status">
-                          <% if objective.status == 'On Track' %>
-                            <strong><span style="color:#5cb85c"><%=objective.status%></span></strong>
+                            <% if objective.status == 'On Track' %>
+                            <strong>
+                                <span style="color:#5cb85c"><%=objective.status%></span>
+                            </strong>
                             <% elsif objective.status == 'Behind' %>
-                            <strong><span style="color:#f0ad4e"><%=objective.status%></span></strong>
-                            <% else %>
-                            <strong><span style="color:#d9534f"><%=objective.status%></span></strong>
+                            <strong>
+                                <span style="color:#f0ad4e"><%=objective.status%></span>
+                            </strong>
+                        <% else %>
+                            <strong>
+                                <span style="color:#d9534f"><%=objective.status%></span>
+                            </strong>
                             <% end %>
 
                             &emsp;<strong><%= link_to "#{objective.title}", objective_path(objective) %></strong>
                             <div id='progress'>
                                 <i><%=objective.progress%>% - Due in
-                                <%= distance_of_time_in_words_to_now(objective.deadline)%></i>
+                                    <%= distance_of_time_in_words_to_now(objective.deadline)%></i>
                             </div>
                         </div>
                         <% unless @followups.include?(objective) || objective.user_id == current_user.id%>
                         <div class="col-md-3">
-                          <%= link_to "Follow Up", follow_up_path(obj_param: objective.id), :controller => :objective, :action => :follow_up, method: :POST%>
+                            <%= link_to "Follow Up", follow_up_path(obj_param: objective.id), :controller => :objective, :action => :follow_up, method: :POST%>
                         </div>
                         <% end %>
                         <% if objective.follow_id.length != 0%>
                         <div class="col-md-3">
-                          <% if objective.follow_id.length == 1%>
-                          <%= objective.follow_id.length %> member followed up
-                          <% else %>
-                          <%= objective.follow_id.length %> members followed up
-                          <% end %>
+                            <% if objective.follow_id.length == 1%>
+                            <%= objective.follow_id.length %>
+                            member followed up
+                        <% else %>
+                            <%= objective.follow_id.length %>
+                            members followed up
+                            <% end %>
 
                         </div>
                         <% end %>
-
 
                     </div>
                     <% end %>

@@ -31,6 +31,7 @@ class ObjectivesController < ApplicationController
 
   def show
     @objective = Objective.find_by_id(params[:id])
+    @creator = User.find(@objective.user_id)
     @full_time = @objective.created_at
 
     @followups = User.where(:id => @objective.follow_id)

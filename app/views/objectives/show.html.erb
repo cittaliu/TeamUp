@@ -5,23 +5,11 @@
         <div class="col-md-12">
             <div class="col-md-10 col-md-offset-1 objective">
                 <div class="col-md-8">
-                    <% if @objective.status == 'On Track' %>
-                    <h3>
-                        <span style="color:#5cb85c"><%=@objective.status%></span>
-                    </h3>
-                    <% elsif objective.status == 'Behind' %>
-                    <h3>
-                        <span style="color:#f0ad4e"><%=@objective.status%></span>
-                    </h3>
-                <% else %>
-                    <h3>
-                        <span style="color:#d9534f"><%=@objective.status%></span>
-                    </h3>
-                    <% end %>
 
-                    <h4>
-                        <i><%= @objective.title %></i>
-                    </h4>
+                    <h2>
+                        <strong><%= @objective.title %></strong>
+                    </h2>
+                    &emsp;<i>created by <%= link_to "#{@creator.first_name} #{@creator.last_name}", user_path(@creator) %></i>
                     <p><%= @objective.description %></p>
                     <h5>Description:</h5>
 
@@ -29,7 +17,7 @@
                     |
                     <%= link_to 'Destroy', @objective, method: :delete, data: { confirm: 'Are you sure?' } %>
                     |
-                    <%= link_to 'Back', objectives_path %>
+                    <%= link_to 'Back', team_path(current_team) %>
                     <hr>
                     <h5>Followed By:</h5>
                     <% if @followups.length !=0 %>
@@ -41,8 +29,27 @@
 
                 </div>
                 <div class="col-md-4" id='progress'>
-                    <i><%=@objective.progress%>% - Due in
-                        <%= distance_of_time_in_words_to_now(@objective.deadline)%></i>
+
+                  <i><%=@objective.progress%>% - Due in
+                    <%= distance_of_time_in_words_to_now(@objective.deadline)%></i>
+                    <br>
+                  <% if @objective.status == 'On Track' %>
+                  <h3>
+                    <span style="color:#5cb85c"><i><%=@objective.status%></i></span>
+                  </h3>
+                  <% elsif @objective.status == 'Behind' %>
+                  <h3>
+                    <span style="color:#f0ad4e"><i><%=@objective.status%></i></span>
+                  </h3>
+                  <% else %>
+                  <h3>
+                    <span style="color:#d9534f"><i><%=@objective.status%></i></span>
+                  </h3>
+                  <% end %>
+                  <% unless @followups.include?(current_user) || @objective.user_id == current_user.id%>
+                  <%= link_to "Follow Up", follow_up_path(obj_param: @objective.id), :controller => :objective, :action => :follow_up, method: :POST, class:"btn btn-danger"%>
+                  <% end %>
+                  <br><br>
                 </div>
             </div>
         </div>

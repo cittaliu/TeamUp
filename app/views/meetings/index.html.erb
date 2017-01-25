@@ -1,31 +1,44 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>All Meetings</h3>
+            <div class="col-md-10 col-md-offset-1 objective">
+                <div class="col-md-3">
+                    <h4>Name</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>Start time</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>End time</h4>
+                </div>
+                <% @meetings.each do |meeting| %>
+                <div class="col-md-12">
+                    <div class="col-md-3">
 
-<h1>Meetings</h1>
+                        <%= meeting.name %>
+                    </div>
+                    <div class="col-md-3">
+                        <%= meeting.start_time %>
+                    </div>
+                    <div class="col-md-3">
+                        <%= meeting.end_time %>
+                    </div>
+                    <div class="col-md-3">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                        <%= link_to 'Show', meeting %>
+                        <%= link_to 'Edit', edit_meeting_path(meeting) %>
+                        <%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </div>
+                </div>
 
-  <tbody>
-    <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= meeting.name %></td>
-        <td><%= meeting.start_time %></td>
-        <td><%= meeting.end_time %></td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                <% end %>
+                <hr>
 
-<br>
+                <%= link_to 'New Meeting', new_meeting_path %>
 
-<%= link_to 'New Meeting', new_meeting_path %>
+            </div>
+        </div>
+    </div>
+</div>

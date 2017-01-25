@@ -15,5 +15,5 @@
         <strong><%=user.last_name%></strong>
         <%= user.email %>
     </p>
-   <%= link_to "View", user_path(user), class: 'btn btn-info' %>
+   <%= link_to "View", user_path(user)%> | <%= link_to "Add to Team", add_user_path(user),:controller => :team, :action => :add_to_team, method: :POST %>
 <% end %>
