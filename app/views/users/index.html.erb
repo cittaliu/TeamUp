@@ -1,1 +1,20 @@
-hello!
+<h4>Team Creator:</h4>
+<ul class="team_avator">
+    <%= link_to user_path(@creator) do %>
+    <img src="<%= @creator.img %>" height='50px' width='50px' style='border-radius:100px'>
+    <%= @creator.first_name %>
+    <%= @creator.last_name %>
+    <% end %>
+</ul>
+<h4>Team Member:</h4>
+<% @users.each do |user| %>
+<% if user != @creator %>
+<ul class="team_avator">
+    <img src="<%= user.img %>" height='50px' width='50px' style='border-radius:100px'>
+    <%= link_to user_path(user) do %>
+    <%= user.first_name %>
+    <%= user.last_name %>
+    <% end %>
+</ul>
+<% end %>
+<% end %>

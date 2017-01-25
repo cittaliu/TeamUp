@@ -1,19 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @objective.title %>
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-1 objective">
+                <div class="col-md-8">
+                    <% if @objective.status == 'On Track' %>
+                    <h3>
+                        <span style="color:#5cb85c"><%=@objective.status%></span>
+                    </h3>
+                    <% elsif objective.status == 'Behind' %>
+                    <h3>
+                        <span style="color:#f0ad4e"><%=@objective.status%></span>
+                    </h3>
+                <% else %>
+                    <h3>
+                        <span style="color:#d9534f"><%=@objective.status%></span>
+                    </h3>
+                    <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @objective.description %>
-</p>
+                    <h4>
+                        <i><%= @objective.title %></i>
+                    </h4>
+                    <p><%= @objective.description %></p>
+                    <h5>Description:</h5>
 
-<p>
-  <strong>Status:</strong>
-  <%= @objective.status %>
-</p>
+                    <%= link_to 'Edit', edit_objective_path(@objective) %>
+                    |
+                    <%= link_to 'Destroy', @objective, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    |
+                    <%= link_to 'Back', objectives_path %>
+                    <hr>
+                    <h5>Followed By:</h5>
+                    <% if @followups.length !=0 %>
+                    <% @followups.each do |followup| %>
+                    <i><%= link_to "#{followup.first_name} #{followup.last_name}", user_path(followup) %></i>
+                    <br>
+                    <% end %>
+                    <% end %>
 
-<%= link_to 'Edit', edit_objective_path(@objective) %> |
-<%= link_to 'Back', objectives_path %>
+                </div>
+                <div class="col-md-4" id='progress'>
+                    <i><%=@objective.progress%>% - Due in
+                        <%= distance_of_time_in_words_to_now(@objective.deadline)%></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
   def index
+    @team_users = TeamUser.where(:team_id => current_team.id)
+    @creator = User.find(current_team.creator_id)
+    @users = []
+    @team_users.each do |team_user|
+      user = User.find(team_user.user_id)
+      @users << user
+    end
+
   end
 
   def new
@@ -30,8 +38,16 @@ class UsersController < ApplicationController
     end
     @full_time = @user.created_at
     @time = @full_time.to_s[0,10]
-  end
 
+    # user's objectives
+    @objectives = Objective.where(:user_id => @user.id)
+    @active_objectives = @objectives.where("deadline >= ?", Date.today)
+
+    # user's followups
+    @followups = Objective.all.select do |obj|
+      obj.follow_id.include?(@user.id)
+    end
+  end
 
   def edit
     user_id = current_user.id

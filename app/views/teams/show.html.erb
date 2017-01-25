@@ -29,6 +29,9 @@
         <li>
             <%= link_to 'Objectives', objectives_path %>
         </li>
+        <li>
+            <%= link_to 'My Team', team_users_path(@team) %>
+        </li>
         <!-- <% @users.each do |user| %>
         <li class="team_avator">
             <%= link_to user_path(user) do %>
@@ -125,14 +128,13 @@
                     <br><br><br>
                     <% @objectives.each do |objective| %>
                     <div class="col-md-12 objective">
-                        <div class="col-md-3 userinfo">
+                        <div class="col-md-2 userinfo">
 
                             <img src="<%= User.find(objective.user_id).img %>" height='32px' width='32px' style='border-radius:100px'>
                             <!-- Move the code here to controller later-->
                             <%= User.find(objective.user_id).first_name %>
-                            <%= User.find(objective.user_id).last_name[0] %>
                         </div>
-                        <div class="col-md-8 status">
+                        <div class="col-md-7 status">
                           <% if objective.status == 'On Track' %>
                             <strong><span style="color:#5cb85c"><%=objective.status%></span></strong>
                             <% elsif objective.status == 'Behind' %>
@@ -147,9 +149,22 @@
                                 <%= distance_of_time_in_words_to_now(objective.deadline)%></i>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <% unless @followups.include?(objective) || objective.user_id == current_user.id%>
+                        <div class="col-md-3">
                           <%= link_to "Follow Up", follow_up_path(obj_param: objective.id), :controller => :objective, :action => :follow_up, method: :POST%>
                         </div>
+                        <% end %>
+                        <% if objective.follow_id.length != 0%>
+                        <div class="col-md-3">
+                          <% if objective.follow_id.length == 1%>
+                          <%= objective.follow_id.length %> member followed up
+                          <% else %>
+                          <%= objective.follow_id.length %> members followed up
+                          <% end %>
+
+                        </div>
+                        <% end %>
+
 
                     </div>
                     <% end %>

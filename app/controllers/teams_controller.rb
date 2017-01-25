@@ -49,6 +49,11 @@ class TeamsController < ApplicationController
     @count_behind = @active_objectives.where(:status => "Behind").length
     @count_at_risk = @active_objectives.where(:status => "At Risk").length
 
+    # current_user's followups
+    @followups = Objective.all.select do |obj|
+      obj.follow_id.include?(current_user.id)
+    end
+
   end
 
   def create
