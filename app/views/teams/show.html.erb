@@ -16,7 +16,7 @@
                 </strong>
                 <p>
                     <i>--
-                        <%= @team.description %></i>
+                        <%= @team.description[0..20] %></i>
                 </p>
             </h5>
         </li>
@@ -29,14 +29,14 @@
         <li>
             <%= link_to 'Objectives', objectives_path %>
         </li>
-        <% @users.each do |user| %>
+        <!-- <% @users.each do |user| %>
         <li class="team_avator">
             <%= link_to user_path(user) do %>
             <%= user.first_name %>
             <%= user.last_name %>
             <% end %>
         </li>
-        <% end %>
+        <% end %> -->
 
     </ul>
 </div>
@@ -80,10 +80,10 @@
                         <% end %>
                     </div>
                 </div>
-                <div class="col-md-1"></div>
 
-                <div class="col-md-5">
-                    <h4>Here is a Summary of Monthly Team-Wide Objectives (<%= @count_active %>)</h4>
+
+                <div class="col-md-6">
+                    <h4>Here is a Summary of Active Team-Wide Objectives (<%= @count_active %>)</h4>
                     <div class="col-md-1">
                         <div class="green"></div>
                     </div>
@@ -125,9 +125,10 @@
                     <br><br><br>
                     <% @objectives.each do |objective| %>
                     <div class="col-md-12 objective">
-                        <div class="col-md-4 userinfo">
+                        <div class="col-md-3 userinfo">
 
                             <img src="<%= User.find(objective.user_id).img %>" height='32px' width='32px' style='border-radius:100px'>
+                            <!-- Move the code here to controller later-->
                             <%= User.find(objective.user_id).first_name %>
                             <%= User.find(objective.user_id).last_name[0] %>
                         </div>
@@ -140,15 +141,19 @@
                             <strong><span style="color:#d9534f"><%=objective.status%></span></strong>
                             <% end %>
 
-                            <strong><%= objective.title %></strong>
+                            &emsp;<strong><%= link_to "#{objective.title}", objective_path(objective) %></strong>
                             <div id='progress'>
-                                <i><%=objective.progress%></i>% - Due in
-                                <%= distance_of_time_in_words_to_now(objective.deadline)%>
+                                <i><%=objective.progress%>% - Due in
+                                <%= distance_of_time_in_words_to_now(objective.deadline)%></i>
                             </div>
+                        </div>
+                        <div class="col-md-1">
+                          <%= link_to "Follow Up", follow_up_path(obj_param: objective.id), :controller => :objective, :action => :follow_up, method: :POST%>
                         </div>
 
                     </div>
                     <% end %>
+
                 </div>
             </div>
         </div>

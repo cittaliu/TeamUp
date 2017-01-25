@@ -59,19 +59,19 @@ body {
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    text-indent: 15px;
     line-height: 40px;
 }
 
 .sidebar-nav li a {
-    font-size: 13px;
+    font-size: 14px;
     display: block;
     text-decoration: none;
     color: #999999;
 }
 
 .sidebar-nav li a:hover {
-    font-size: 14px;
+    font-size: 15px;
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
@@ -83,10 +83,10 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 200px;
+    height: 300px;
     color: grey;
     font-style: oblique;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .sidebar-nav > .sidebar-brand a {

@@ -1,27 +1,77 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          <br>
+            <br>
+
             &emsp;<%= link_to "On Track", objectives_path(:status=>"On Track"), class: "btn btn-success" %>
             <%= link_to "Behind", objectives_path(:status=>"Behind"), class: "btn btn-warning" %>
             <%= link_to "At Risk", objectives_path(:status=>"At Risk"), class: "btn btn-danger" %>
+            <%= link_to "Summary", objectives_path(:status=>"All"), class: "btn btn-info" %>
+
             <div class="objectives">
+                <% if @objectives.length !=0 %>
                 <% @objectives.each do |objective| %>
                 <div class="objective">
-                <strong>
-                    <h5><%= objective.title %></h5>
-                </strong>
-                <i><%=objective.description%></i>
-                <strong><%=objective.status%></strong>
+                    <strong>
+                        <h5><%= objective.title %></h5>
+                    </strong>
+                    <i><%=objective.description%></i>
+                    <strong><%=objective.status%></strong>
 
-                <%= link_to 'Show', objective %>
-                |
-                <%= link_to 'Edit', edit_objective_path(objective) %>
-                |
-                <%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %>
-              </div>
+                    <%= link_to 'Show', objective %>
+                    <%if objective.user_id == current_user.id%>
+                    |
+                    <%= link_to 'Edit', edit_objective_path(objective) %>
+                    |
+                    <%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                </div>
 
                 <% end %>
+            <% else %>
+                <div class="col-md-6">
+                    <h4>Summary of Monthly Team-Wide Objectives(<%= @count_month %>)</h4>
+                    <div class="col-md-1">
+                        <div class="green"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_month_on_track > 1 %>
+                        <h5><%= @count_month_on_track %>
+                            objectives are on track</h5>
+                    <% else %>
+                        <h5><%= @count_month_on_track %>
+                            objective is on track</h5>
+                        <% end %>
+
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="yellow"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_month_behind > 1 %>
+                        <h5><%= @count_month_behind %>
+                            objectives are behind</h5>
+                    <% else %>
+                        <h5><%= @count_month_behind %>
+                            objective is behind</h5>
+                        <% end %>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="red"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <% if @count_month_at_risk > 1 %>
+                        <h5><%= @count_month_at_risk %>
+                            objectives are at risk</h5>
+                    <% else %>
+                        <h5><%= @count_month_at_risk %>
+                            objective is at risk</h5>
+                        <% end %>
+                    </div>
+                </div>
+                <% end %>
+
             </div>
             <hr>
             <%= link_to "Create New Objective", new_objective_path, class: 'btn btn-danger' %>

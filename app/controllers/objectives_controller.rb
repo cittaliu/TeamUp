@@ -1,10 +1,16 @@
 class ObjectivesController < ApplicationController
   def index
       @all_objectives = Objective.where(:team_id => current_team.id)
+      @objectives_month = @all_objectives.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_month, DateTime.now.end_of_month)
+      # track all objectives created within the month
+      @count_month = @objectives_month.length
+      @count_month_on_track = @objectives_month.where(:status => "On Track").length
+      @count_month_behind = @objectives_month.where(:status => "Behind").length
+      @count_month_at_risk = @objectives_month.where(:status => "At Risk").length
     if params[:status]
-      @objectives = @all_objectives.where(:status => params[:status])
+      @objectives = @objectives_month.where(:status => params[:status]).order('created_at DESC')
     else
-      @objectives = @all_objectives
+      @objectives = @objectives_month.order('created_at DESC')
     end
   end
 
@@ -43,6 +49,13 @@ class ObjectivesController < ApplicationController
     delete_objective = Objective.find_by_id(params[:id])
     Objective.destroy(delete_objective)
     redirect_to objectives_path
+  end
+
+  def follow_up
+    @objective = Objective.find_by_id(params[:obj_param])
+    puts @objective
+    @user = current_user.id
+    @objective.follow_id << @user
   end
 
   private

@@ -31,7 +31,8 @@ Rails.application.routes.draw do
   get '/search', to: 'users#search', as: 'search_users'
   post '/add_user/:id', to: 'teams#add_to_team', as: 'add_user'
 
-
+  # follow up on objectives
+  post '/follow_up/:obj_param', to: 'objectives#follow_up', as: 'follow-up'
 
   #Team Pages
   resources :teams do

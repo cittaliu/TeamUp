@@ -44,26 +44,10 @@ class TeamsController < ApplicationController
     @count_active = @active_objectives.length
     @objectives = @active_objectives.order('created_at DESC')[0..5]
 
+    # active objectives
     @count_on_track = @active_objectives.where(:status => "On Track").length
     @count_behind = @active_objectives.where(:status => "Behind").length
     @count_at_risk = @active_objectives.where(:status => "At Risk").length
-
-
-
-    # @all_objectives = Objective.where(:team_id => current_team.id)
-    # # only show the upcming objectives
-    # @objectives_active = []
-    # @all_objectives.each do |elem|
-    #   if elem.deadline > Time.now
-    #     @objectives_active << elem
-    #   end
-    # end
-    # @objectives = Objective.where(:team_id => current_team.id).order('created_at DESC')[0..5]
-    # @counts = @objectives_active.length
-    # @count_on_track = @objectives_active.where(:status => "On Track").length
-    # @count_behind = @objectives_active.where(:status => "Behind").length
-    # @count_at_risk = @objectives_active.where(:status => "At Risk").length
-
 
   end
 
