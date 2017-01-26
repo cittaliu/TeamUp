@@ -33,12 +33,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="col-md-2">
-                            <h3>Welcome
-                              <br>
-                                <i><%= @user.first_name%> <%= @user.last_name%>!</i>
-                            </h3>
+                            <h3>Welcome</h3>
+
+                            <h4><i><%= @user.first_name%> <%= @user.last_name%>!</i>
+                            </h4>
                             <br>
-                            <img src="<%= @user.img %>" alt="profile image" height='200px' width='200px'>
+                            <img src="<%= @user.img %>" alt="profile image" height='170px' width='170px' style='border-radius:100px'>
                             <br><br><hr>
                             <h4>
                                 <i><%= @user.email %></i>
@@ -49,8 +49,8 @@
                             <h5>Joined on
                                 <%= @time %></h5>
                                 <% if current_user == @user%>
-                                <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary" %>
-                                <a href="#menu-toggle" class="btn btn-danger" id="menu-toggle">Switch Team</a>
+                                <%= link_to "Edit", edit_user_path(@user) %> |
+                                <a href="#menu-toggle" id="menu-toggle">Switch Team</a>
                                 <%end%>
                                 <% if @user != current_user %>
                                 <%= link_to "Add", add_user_path(@user),:controller => :team, :action => :add_to_team, method: :POST, class: "btn btn-primary" %>
@@ -64,7 +64,6 @@
                             <% @active_objectives.each do |objective| %>
                             <div class="col-md-12 objective">
 
-                                <div class="col-md-8 status">
                                   <% if objective.status == 'On Track' %>
                                     <strong><span style="color:#5cb85c"><%=objective.status%></span></strong>
                                     <% elsif objective.status == 'Behind' %>
@@ -78,7 +77,6 @@
                                         <i><%=objective.progress%>% - Due in
                                         <%= distance_of_time_in_words_to_now(objective.deadline)%></i>
                                     </div>
-                                </div>
 
                             </div>
                             <% end %>
@@ -87,7 +85,9 @@
 
                           </div>
                           <div class="col-md-7">
-                            <h4>My Current Follow Ups</h4>
+                            <% unless @followups.length ==0 %>
+                            <h4>Current Follow Ups</h4>
+                            <% end %>
                             <% @followups.each do |followup| %>
                             <div class="col-md-12 objective">
                               <div class="col-md-3 userinfo">

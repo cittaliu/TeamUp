@@ -32,6 +32,7 @@
                 
                 <div>
                   <%= pie_chart @objectives_month.group(:status).count %>
+                 <%= column_chart @objectives_month.group_by_day_of_week(:created_at, format: "%a").count %>
                 </div>
                 <% end %>
 

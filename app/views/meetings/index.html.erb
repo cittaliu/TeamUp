@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10 col-md-offset-1">
             <h3>All Meetings</h3>
-            <div class="col-md-10 col-md-offset-1 objective">
+            <div class="col-md-12 objectives">
                 <div class="col-md-3">
                     <h4>Name</h4>
                 </div>
@@ -36,9 +36,12 @@
                 <% end %>
                 <hr>
 
-                <%= link_to 'New Meeting', new_meeting_path %>
 
             </div>
+            
+            <%= link_to 'New Meeting', new_meeting_path, class:'btn btn-danger' %>
+
         </div>
+
     </div>
 </div>

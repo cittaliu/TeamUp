@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="col-md-10 col-md-offset-1 text-center">
   <h1>Search</h1>
   <%= form_tag search_users_path, :method => :get do %>
   <p>
@@ -6,14 +6,14 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
   <% end %>
-
 </div>
-
+<div class="col-md-10 col-md-offset-1">
 <% @users.each do |user| %>
     <p class="card-text">
         <strong><%= user.first_name %></strong>
         <strong><%=user.last_name%></strong>
         <%= user.email %>
+        <%= link_to "View", user_path(user)%> | <%= link_to "Add to Team", add_user_path(user),:controller => :team, :action => :add_to_team, method: :POST %>
     </p>
-   <%= link_to "View", user_path(user)%> | <%= link_to "Add to Team", add_user_path(user),:controller => :team, :action => :add_to_team, method: :POST %>
 <% end %>
+</div>
