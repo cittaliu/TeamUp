@@ -18,10 +18,7 @@
           <fieldset class="form-group">
             <label for="email">Description</label>
               <%= f.text_area :description, class: "form-control", placeholder: "Description" %>
-              <!-- display flash messages  -->
-              <% flash.each do |name, msg| %>
-              <div id="flash"> &emsp; <i><%= msg %></i></div>
-              <% end %>
+            
           </fieldset>
           <fieldset class="form-group">
             <%= f.submit "Submit", class: "btn btn-primary" %>

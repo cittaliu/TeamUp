@@ -68,6 +68,12 @@ class UsersController < ApplicationController
   end
 
   def search
+    @team_users = TeamUser.where(:team_id => current_team.id)
+    @users_in_team = []
+    @team_users.each do |team_user|
+      user = User.find(team_user.user_id)
+      @users_in_team << user
+    end
     @search = User.search do
       fulltext params[:search]
     end

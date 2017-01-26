@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/', to: 'sessions#index', as: 'home'
 
   resources :meetings
   resources :events
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'teams/destroy'
 
-  get '/', to: 'users#index', as: 'users'
+  get '/users', to: 'users#index', as: 'users'
 
   # User Signup & Login/Logout
   get '/signup', to: 'users#new', as: 'signup'

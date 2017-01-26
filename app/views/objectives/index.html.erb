@@ -29,10 +29,10 @@
 
                 <% end %>
             <% else %>
-                
+
                 <div>
                   <%= pie_chart @objectives_month.group(:status).count %>
-                 <%= column_chart @objectives_month.group_by_day_of_week(:created_at, format: "%a").count %>
+                  <%= column_chart @objectives_month.group_by_day_of_week(:created_at, format: "%a").count %>
                 </div>
                 <% end %>
 
@@ -40,6 +40,8 @@
             </div>
             <hr>
             <%= link_to "Create New Objective", new_objective_path, class: 'btn btn-danger' %>
+            <%= link_to "Back", team_path(current_team), class: 'btn btn-info' %>
+
         </div>
     </div>
 </div>

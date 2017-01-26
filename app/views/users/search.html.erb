@@ -13,7 +13,10 @@
         <strong><%= user.first_name %></strong>
         <strong><%=user.last_name%></strong>
         <%= user.email %>
-        <%= link_to "View", user_path(user)%> | <%= link_to "Add to Team", add_user_path(user),:controller => :team, :action => :add_to_team, method: :POST %>
+        <%= link_to "View", user_path(user)%>
+        <% unless @users_in_team.include?(user) %>
+        | <%= link_to "Add to Team", add_user_path(user),:controller => :team, :action => :add_to_team, method: :POST %>
+        <% end %>
     </p>
 <% end %>
 </div>

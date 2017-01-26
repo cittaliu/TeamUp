@@ -17,6 +17,21 @@
  *= require simple_calendar
  */
 
+ .welcome {
+  background: url("http://i.imgur.com/T1emv4D.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 750px;
+  width: 100%;
+}
+
+.tagline {
+    padding-top: 220px;
+    font-size: 120px;
+    color: black;
+}
+
+
  .head-nav a {
    color: white !important;
  }
