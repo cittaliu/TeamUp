@@ -29,48 +29,12 @@
 
                 <% end %>
             <% else %>
-                <div class="col-md-6">
-                    <h4>Summary of Monthly Team-Wide Objectives(<%= @count_month %>)</h4>
-                    <div class="col-md-1">
-                        <div class="green"></div>
-                    </div>
-                    <div class="col-md-3">
-                        <% if @count_month_on_track > 1 %>
-                        <h5><%= @count_month_on_track %>
-                            objectives are on track</h5>
-                    <% else %>
-                        <h5><%= @count_month_on_track %>
-                            objective is on track</h5>
-                        <% end %>
-
-                    </div>
-
-                    <div class="col-md-1">
-                        <div class="yellow"></div>
-                    </div>
-                    <div class="col-md-3">
-                        <% if @count_month_behind > 1 %>
-                        <h5><%= @count_month_behind %>
-                            objectives are behind</h5>
-                    <% else %>
-                        <h5><%= @count_month_behind %>
-                            objective is behind</h5>
-                        <% end %>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="red"></div>
-                    </div>
-                    <div class="col-md-3">
-                        <% if @count_month_at_risk > 1 %>
-                        <h5><%= @count_month_at_risk %>
-                            objectives are at risk</h5>
-                    <% else %>
-                        <h5><%= @count_month_at_risk %>
-                            objective is at risk</h5>
-                        <% end %>
-                    </div>
+                
+                <div>
+                  <%= pie_chart @objectives_month.group(:status).count %>
                 </div>
                 <% end %>
+
 
             </div>
             <hr>
