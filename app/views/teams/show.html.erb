@@ -1,8 +1,10 @@
+<!-- TODO: This file is too big. Use partials -->
 <div id="wrapper">
-
+<!-- TODO: Move your sidebar code into a partial -->
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
+          <!-- TODO: Remove unused code from production -->
             <!-- <li class="sidebar-brand">
               <%= link_to team_path(@team) do %>
                 <img src="<%= @team.img %>" alt="avator image" height='100px' width='100px'>
@@ -32,6 +34,7 @@
         <li>
             <%= link_to 'My Team', team_users_path(@team) %>
         </li>
+        <!-- TODO: Remove unused code from production -->
         <!-- <% @users.each do |user| %>
         <li class="team_avator">
             <%= link_to user_path(user) do %>
@@ -50,6 +53,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+              <!-- TODO: MOve this into a partial-->
                 <div class="col-md-5">
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Main Menu</a>
                     <br><br>
@@ -84,6 +88,7 @@
                     </div>
                 </div>
 
+              <!-- TODO: Move this into a partial -->
                 <div class="col-md-6">
                     <h4>Here is a Summary of Active Team-Wide Objectives (<%= @count_active %>)</h4>
                     <div class="col-md-1">
