@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
       fulltext params[:search]
     end
     @teams = @search.results
+    # TODO: Remove unused code from production
     # @teams_by_date = @teams.group_by(&:date_published)
     # @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
@@ -14,6 +15,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+    # TODO: This route method is WAY TOO BIG. Extract it into a method in the team.rb model file.
     @team = Team.find(params[:id])
     session[:team_id] = @team.id
     @creator = User.find(@team.creator_id)
@@ -58,6 +60,7 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
+    # TODO: You have a mature web application; do not hotlink on imgur. Host your own images.
     @team.img = @team.img||"http://i.imgur.com/RfemM9T.png"
     @team.creator_id = current_user.id
     if @team.save
@@ -76,6 +79,7 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find_by_id(params[:id])
     @team.update(team_params)
+    # TODO: Handle errors here
     redirect_to current_user
   end
 
@@ -86,6 +90,7 @@ class TeamsController < ApplicationController
   end
 
   def add_to_team
+    # TODO: Is it possible to add the same user over and over again?
     @user = User.find_by_id(params[:id])
     @team = current_team
     @team.users << @user

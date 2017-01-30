@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # TODO: DO NOT HOTLINK IMAGES WHEN YOU HAVE A FULL BLOWN WEB APPLICATION THAT DOES THAT FOR YOU.
     @user.img = "http://i.imgur.com/7Yc9GZf.png" if @user.img.empty?
     if @user.save
       session[:user_id] = @user.id
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    # TODO: This is too big. Extract it into a method in your user model file.
     @user = User.find_by_id(params[:id])
 
     @team_users = TeamUser.where(:user_id => @user.id)
@@ -58,6 +60,7 @@ class UsersController < ApplicationController
     user_id = current_user.id
     @user = User.find_by_id(user_id)
     @user.update_attributes(user_params)
+    # TODO: Handle errors here
     redirect_to user_path(@user)
   end
 

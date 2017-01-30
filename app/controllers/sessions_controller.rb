@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_path(user)
     else
+      # TODO: Assist user with error messages
       redirect_to '/login'
     end
   end

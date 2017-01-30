@@ -9,7 +9,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
+explode! # TODO: Drop your db and create the proper tables without the extra additions to reduce your migration files.
 ActiveRecord::Schema.define(version: 20170125054317) do
 
   # These are extensions that must be enabled in order to support this database

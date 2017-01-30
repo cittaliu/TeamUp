@@ -1,5 +1,9 @@
 class ObjectivesController < ApplicationController
+
+  # TODO: Your objectives view are either blank or could use some templating to reduce repeated code.
+
   def index
+    # TODO: Can you extract all of these DB calls to a helper method in your model or model helper file? This is a large block of code. We should try to keep our controllers as small as possible while letting our models do all of hte hard work.
       @all_objectives = Objective.where(:team_id => current_team.id)
       @objectives_month = @all_objectives.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_month, DateTime.now.end_of_month)
       # track all objectives created within the month
@@ -23,6 +27,7 @@ class ObjectivesController < ApplicationController
     if @objective.save
       redirect_to objective_path(@objective)
     else
+      # TODO: Your custom error message isn't very helpful. Consider using the built in messages automatically created with specific reasons for errors.
       flash[:error] = "! Unable to create new objective"
       redirect_to new_objective_path
     end
@@ -46,6 +51,7 @@ class ObjectivesController < ApplicationController
   def update
     @objective = Objective.find_by_id(params[:id])
     @objective.update_attributes(objective_params)
+    # TODO: No error handling?
     redirect_to objective_path(@objective)
   end
 
